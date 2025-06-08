@@ -108,9 +108,6 @@ rm -f "$CASK_PATH.bak"
 
 
 # Git operations
-git checkout main
-git pull origin main
-
 git add "$CASK_PATH"
 git commit -S -m "$APP_NAME: v$LATEST_VERSION"
 git push origin main
