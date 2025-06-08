@@ -108,50 +108,11 @@ rm -f "$CASK_PATH.bak"
 
 
 # Git operations
-BRANCH_NAME="update-${APP_NAME,,}-$LATEST_VERSION"
-BRANCH_NAME=${BRANCH_NAME// /-}
+git checkout main
+git pull origin main
 
-git checkout -b "$BRANCH_NAME"
 git add "$CASK_PATH"
 git commit -S -m "$APP_NAME: v$LATEST_VERSION"
-git push origin "$BRANCH_NAME" -f
-
-# Detect repo from actual git remote
-GIT_REMOTE_URL=$(git config --get remote.origin.url)
-if [[ "$GIT_REMOTE_URL" =~ github\.com[:/](.*)/(.*)(\.git)?$ ]]; then
-  OWNER="${BASH_REMATCH[1]}"
-  REPO_NAME_ONLY="${BASH_REMATCH[2]}"
-else
-  echo "❌ Could not determine GitHub repo from git remote URL."
-  exit 1
-fi
-
-# Confirm branch exists on remote
-if ! git ls-remote --heads origin "$BRANCH_NAME" | grep -q "$BRANCH_NAME"; then
-  echo "❌ Branch $BRANCH_NAME not found on remote. Did push fail?"
-  exit 1
-fi
-
-PR_RESPONSE=$(curl -s -X POST \
-  -H "Authorization: token $GH_PAT" \
-  -H "Accept: application/vnd.github.v3+json" \
-  "https://api.github.com/repos/$OWNER/$REPO_NAME_ONLY/pulls" \
-  -d @- <<EOF
-{
-  "title": "$APP_NAME: v$LATEST_VERSION",
-  "body": "Update $APP_NAME to v$LATEST_VERSION",
-  "head": "$BRANCH_NAME",
-  "base": "main"
-}
-EOF
-)
-
-PR_URL=$(echo "$PR_RESPONSE" | grep -o '"html_url": "[^"]*"' | cut -d'"' -f4)
-
-if [ -n "$PR_URL" ]; then
-  echo "Pull request created: $PR_URL"
-else
-  echo "Failed to create PR. Response: $PR_RESPONSE"
-fi
+git push origin main
 
 echo "Done with $APP_NAME"
