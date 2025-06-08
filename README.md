@@ -1,6 +1,24 @@
 ## firebrew
 Self-maintained [Homebrew](https://brew.sh/) repository.
 
+`tree`
+```
+.
+├── audit_exceptions
+│   └── github_prerelease_allowlist.json
+├── Casks
+│   ├── aya.rb
+│   ├── pcsx2.rb
+│   ├── rquickshare.rb
+│   ├── uad-ng.rb
+│   └── vencordinstaller.rb
+├── README.md
+└── scripts
+    ├── casks-config.sh
+    ├── process-casks.sh
+    └── update-cask.sh
+```
+
 ### Adding the Tap
 
 To add this tap to your Homebrew installation:
