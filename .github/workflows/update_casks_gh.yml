@@ -7,8 +7,7 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
-
+  
 jobs:
   update-casks:
     runs-on: ubuntu-latest
