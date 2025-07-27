@@ -4,15 +4,18 @@ Self-maintained [Homebrew](https://brew.sh/) repository.
 `tree`
 ```
 .
-├── audit_exceptions
-│   └── github_prerelease_allowlist.json
 ├── Casks
 │   ├── aya.rb
 │   ├── pcsx2.rb
 │   ├── rquickshare.rb
+│   ├── stacher7.rb
 │   ├── uad-ng.rb
 │   └── vencordinstaller.rb
+├── Formula
+│   └── cutefetch.rb
 ├── README.md
+├── audit_exceptions
+│   └── github_prerelease_allowlist.json
 └── scripts
     ├── casks-config.sh
     ├── process-casks.sh
