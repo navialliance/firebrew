@@ -31,13 +31,22 @@ brew tap navialliance/firebrew https://github.com/navialliance/firebrew
 ```
 
 ### App Installation
+#### Formula
+```
+brew install navialliance/firebrew/appname
+```
+or
+```
+brew install appname
+```
 
+#### Casks
 ```bash
 brew install --cask navialliance/firebrew/appname
 ```
 or
 ```
-brew install --cask appname #if there's no duplicate casks
+brew install --cask appname
 ```
 
 ### Removing the Tap
